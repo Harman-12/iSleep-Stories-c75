@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView, ToastAndroid, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView, FlatList, ToastAndroid, ScrollView } from 'react-native';
 import {Header, SearchBar} from 'react-native-elements';
 import db from '../config'
 
@@ -78,34 +78,16 @@ export default class ReadStoryScreen extends React.Component {
             />
           </View>
           
-          <ScrollView>
-              <View>
-                {
-                  this.state.search === "" ? 
-                    this.state.allStories.map((item)=>(
-                      <View style={{borderColor:'purple',borderWidth:2,padding:10,alignItems:'center',margin:30}}>
-                        <Text>
-                          Title : {item.title}
-                        </Text>
-                        <Text>
-                          Author : {item.author}
-                        </Text>
-                      </View>
-                    ))
-                  :
-                  this.state.dataSource.map((item)=>(
-                    <View style={{borderColor:'purple',borderWidth:2,padding:10,alignItems:'center',margin:30}}>
-                      <Text>
-                       Title : {item.title}
-                      </Text>
-                      <Text>
-                       Author : {item.author}
-                      </Text>
-                    </View>
-                  ))
-                }
-              </View>
-          </ScrollView> 
+          <FlatList
+                data={this.state.search === "" ?  this.state.allStories: this.state.dataSource}
+                renderItem={({ item }) => (
+                  <View style={styles.itemContainer}>
+                    <Text>  Title: {item.title}</Text>
+                    <Text>  Author : {item.author}</Text>
+                  </View>
+                )}
+                keyExtractor={(item, index) => index.toString()}
+                /> 
           
           
           
