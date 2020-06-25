@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView, FlatList, ToastAndroid, ScrollView } from 'react-native';
 import {Header, SearchBar} from 'react-native-elements';
-import db from '../config'
+import db from '../config';
+import * as firebase from 'firebase';
 
 export default class ReadStoryScreen extends React.Component {
     constructor(){
@@ -84,6 +85,7 @@ export default class ReadStoryScreen extends React.Component {
                   <View style={styles.itemContainer}>
                     <Text>  Title: {item.title}</Text>
                     <Text>  Author : {item.author}</Text>
+                    <Text>  Story : {item.storyText}</Text>
                   </View>
                 )}
                 keyExtractor={(item, index) => index.toString()}
